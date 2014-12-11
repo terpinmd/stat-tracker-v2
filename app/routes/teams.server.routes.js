@@ -14,7 +14,7 @@ module.exports = function(app) {
 		.put(users.requiresLogin, teams.hasAuthorization, teams.update)
 		.delete(users.requiresLogin, teams.hasAuthorization, teams.delete);
         
-	app.route('/teams/:teamId/player')
+	app.route('/teams/:teamId/player/:playerId')
 		.delete(users.requiresLogin, teams.removePlayer);        
 
 	// Finish by binding the Team middleware

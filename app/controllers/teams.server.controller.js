@@ -86,10 +86,15 @@ exports.list = function(req, res) {
 
 
 exports.removePlayer  = function(req, res) { 
-    var player = req.body.player;
+    var playerId = req.params.playerId;
     var teamId = req.params.teamId;
     Team.findById(teamId).exec(function(err, team) {
-        team.players = [];
+        if(team.players.length === 1){
+            team.players = [];
+        }
+        team.players = _.reject(team.players, function(p){
+           return p._id.toString() === playerId; 
+        });
         team.save(function(err) {
                 if (err) {
                         return res.status(400).send({

@@ -13,15 +13,17 @@ var PlayerSchema = new Schema({
     last_name: {
       type: String,
       trim: true,
-      max:2000
+      max:20
     },
     first_name: {
       type: String,
       trim: true,
-      max:2000
+      max:20
     },
     jersey:{
-        type: Number
+      type: String,
+      trim: true,
+      max:30
     }
 });
 

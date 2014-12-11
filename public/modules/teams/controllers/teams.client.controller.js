@@ -9,8 +9,7 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 		$scope.create = function() {
 			// Create new Team object
 			var team = new Teams ({
-				name: this.name,
-                                players: [{last_name: "hammond", first_name: "cole", jersey: 11}]
+				name: this.name
 			});
 
 			// Redirect after save
@@ -69,19 +68,22 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 //                        console.log($scope.team);
                         var team = $scope.team;
                         team.players.push({
-                            first_name: "whatevber",
-                            last_name: "test",
-                            jersey: 1
+                            first_name: $scope.player.first_name,
+                            last_name: $scope.player.last_name,
+                            jersey: $scope.player.jersey
                         });
-                        $scope.update();
+			team.$update(function() {
+				$location.path('teams/' + team._id + "/edit");
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
 		};    
                 
                 $scope.remove = function(player) {
                     var team = $scope.team;
                     $http({
                         method: 'DELETE',
-                        url: 'teams/' + team._id + '/player',
-                        data: {team: team, player: player}
+                        url: 'teams/' + team._id + '/player/' + player._id
                     }).success(function(response) {
                         $scope.findOne();
                     }).error(function(response) {
