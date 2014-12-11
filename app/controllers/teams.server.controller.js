@@ -84,6 +84,26 @@ exports.list = function(req, res) {
 	});
 };
 
+
+exports.removePlayer  = function(req, res) { 
+    var player = req.body.player;
+    var teamId = req.params.teamId;
+    Team.findById(teamId).exec(function(err, team) {
+        team.players = [];
+        team.save(function(err) {
+                if (err) {
+                        return res.status(400).send({
+                                message: errorHandler.getErrorMessage(err)
+                        });
+                } else {
+                        res.jsonp(team);
+                }
+        });        
+    });
+
+;    
+};
+
 /**
  * Team middleware
  */

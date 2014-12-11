@@ -9,6 +9,27 @@ var mongoose = require('mongoose'),
 /**
  * Team Schema
  */
+var PlayerSchema = new Schema({
+    last_name: {
+      type: String,
+      trim: true,
+      max:2000
+    },
+    first_name: {
+      type: String,
+      trim: true,
+      max:2000
+    },
+    jersey:{
+        type: Number
+    }
+});
+
+mongoose.model('Player', PlayerSchema);
+
+/**
+ * Team Schema
+ */
 var TeamSchema = new Schema({
 	name: {
 		type: String,
@@ -24,21 +45,7 @@ var TeamSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
-        players:[{
-            last_name: {
-              type: String,
-              trim: true,
-              max:2000
-            },
-            first_name: {
-              type: String,
-              trim: true,
-              max:2000
-            },
-            jersey:{
-                type: Number
-            }
-        }]
+        players:[PlayerSchema]
 });
 
 mongoose.model('Team', TeamSchema);

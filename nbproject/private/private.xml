@@ -3,8 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/home/jeremy/dev/repo/stattracker-v2/public/modules/teams/views/edit-team.client.view.html</file>
             <file>file:/home/jeremy/dev/repo/stattracker-v2/public/modules/teams/controllers/teams.client.controller.js</file>
-            <file>file:/home/jeremy/dev/repo/stattracker-v2/public/modules/teams/views/view-team.client.view.html</file>
+            <file>file:/home/jeremy/dev/repo/stattracker-v2/app/controllers/teams.server.controller.js</file>
         </group>
     </open-files>
 </project-private>

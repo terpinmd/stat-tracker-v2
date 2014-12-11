@@ -22,5 +22,17 @@
     </section>
     <section>
         <h1>Players</h1>    
+
+        <div ng-repeat="player in team.players" class="row">
+            <div class="col-md-1 pull-left">
+                <a href="#" ng-click="remove(player)">delete</a>
+            </div>          
+            <div class="col-md-1">
+                #{{player.jersey}}:
+            </div>
+            <div class="col-md-5 pull-left">
+                {{player.first_name}} {{player.last_name}}   
+            </div>
+        </div>           
     </section>    
 </div>

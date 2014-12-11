@@ -1,15 +1,16 @@
 'use strict';
 
 // Teams controller
-angular.module('teams').controller('TeamsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Teams',
-	function($scope, $stateParams, $location, Authentication, Teams) {
+angular.module('teams').controller('TeamsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Teams', '$http',
+	function($scope, $stateParams, $location, Authentication, Teams, $http) {
 		$scope.authentication = Authentication;
 
 		// Create new Team
 		$scope.create = function() {
 			// Create new Team object
 			var team = new Teams ({
-				name: this.name
+				name: this.name,
+                                players: [{last_name: "hammond", first_name: "cole", jersey: 11}]
 			});
 
 			// Redirect after save
@@ -43,7 +44,6 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 		// Update existing Team
 		$scope.update = function() {
 			var team = $scope.team;
-
 			team.$update(function() {
 				$location.path('teams/' + team._id);
 			}, function(errorResponse) {
@@ -62,5 +62,33 @@ angular.module('teams').controller('TeamsController', ['$scope', '$stateParams',
 				teamId: $stateParams.teamId
 			});
 		};
+                
+		// Find existing Team
+		$scope.addPlayer = function() {
+//                        $scope.team.players.push($scope.player);
+//                        console.log($scope.team);
+                        var team = $scope.team;
+                        team.players.push({
+                            first_name: "whatevber",
+                            last_name: "test",
+                            jersey: 1
+                        });
+                        $scope.update();
+		};    
+                
+                $scope.remove = function(player) {
+                    var team = $scope.team;
+                    $http({
+                        method: 'DELETE',
+                        url: 'teams/' + team._id + '/player',
+                        data: {team: team, player: player}
+                    }).success(function(response) {
+                        $scope.findOne();
+                    }).error(function(response) {
+                        $scope
+                                .error = response.message;
+                    });
+
+                }
 	}
 ]);
